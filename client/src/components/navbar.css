@@ -1,0 +1,14 @@
+#searchDivNav {
+  display: flex;
+  flex-basis: 0%;
+}
+
+#accountDivNav {
+  display: flex;
+  float: right;
+  margin-left: auto;
+}
+
+#search {
+  min-width: 300px;
+}
