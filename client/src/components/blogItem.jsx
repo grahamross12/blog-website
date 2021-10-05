@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./blogItem.css";
+import "./css/blogItem.css";
 
 class BlogItem extends Component {
   constructor(props) {
@@ -7,8 +7,8 @@ class BlogItem extends Component {
   }
   render() {
     return (
-      <div className="blogItemDiv">
-        <p>{this.props.title}</p>
+      <div className="blogItemDiv rounded-div truncate-text">
+        <h1 className="title-link truncate-text">{this.props.title}</h1>
       </div>
     );
   }

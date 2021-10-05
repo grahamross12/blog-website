@@ -1,3 +1,26 @@
 .contentWrapper {
   height: 100%;
 }
+
+.suggestionsDiv {
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 0 0 1px lightgrey;
+  margin-top: 10px;
+  padding: 10px;
+}
+
+.tagSuggestionsDiv {
+  height: 400px;
+}
+
+.blogSuggestionsDiv {
+  height: 300px;
+}
+
+.rounded-div {
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 0 0 1px lightgrey;
+  background-color: white;
+}

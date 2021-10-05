@@ -1,0 +1,50 @@
+#postFormDiv {
+  height: calc(100vh - 50px);
+  padding: 20px;
+}
+
+.post-form {
+  width: 100%;
+  font-size: 1.5rem;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.post-form-title {
+  font-size: 2rem;
+  font-weight: bold;
+  height: 100px;
+}
+
+#post-content {
+  height: 100%;
+}
+
+.post-form-content {
+  font-size: 1.5rem;
+  display: inline-block;
+  height: 100%;
+}
+
+.post-form-element {
+  height: 100%;
+}
+
+.line-break {
+  width: 95%;
+  margin: auto;
+}
+
+textarea {
+  resize: none !important;
+  width: 100%;
+  height: 100%;
+}
+
+form,
+textarea:focus-visible,
+textarea,
+textarea:focus form:focus-visible {
+  border: none;
+  outline: none;
+}

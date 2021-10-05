@@ -12,17 +12,15 @@ import {
   Collapse,
   UncontrolledDropdown,
   Form,
-  FormGroup,
-  NavbarText,
   Label,
   Input,
   Button,
 } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import "./navbar.css";
+import "./css/navigation.css";
 
-class NavbarBlog extends Component {
+class Navigation extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -30,6 +28,26 @@ class NavbarBlog extends Component {
     };
     this.toggle = () => this.setState({ isOpen: !this.state.isOpen });
   }
+
+  renderAccountButtons = () => {
+    if (this.props.isAunthenticated) {
+      return (
+        <UncontrolledDropdown nav inNavbar>
+          <DropdownToggle nav caret>
+            Username
+          </DropdownToggle>
+          <DropdownMenu>
+            <DropdownItem>My Account</DropdownItem>
+            <DropdownItem>Page Settings</DropdownItem>
+            <DropdownItem divider />
+            <DropdownItem>Log Out</DropdownItem>
+          </DropdownMenu>
+        </UncontrolledDropdown>
+      );
+    } else {
+      return <a href="http://localhost:5000/login">Login</a>;
+    }
+  };
 
   render() {
     return (
@@ -65,17 +83,7 @@ class NavbarBlog extends Component {
 
             <div id="accountDivNav">
               <Nav className="mr-auto" navbar>
-                <UncontrolledDropdown nav inNavbar>
-                  <DropdownToggle nav caret>
-                    Username
-                  </DropdownToggle>
-                  <DropdownMenu>
-                    <DropdownItem>My Account</DropdownItem>
-                    <DropdownItem>Page Settings</DropdownItem>
-                    <DropdownItem divider />
-                    <DropdownItem>Log Out</DropdownItem>
-                  </DropdownMenu>
-                </UncontrolledDropdown>
+                {this.renderAccountButtons()}
               </Nav>
             </div>
           </Collapse>
@@ -85,4 +93,4 @@ class NavbarBlog extends Component {
   }
 }
 
-export default NavbarBlog;
+export default Navigation;
