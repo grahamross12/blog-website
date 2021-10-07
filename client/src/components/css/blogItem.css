@@ -11,4 +11,7 @@
 
 .title-link {
   font-size: 1.5rem;
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
 }

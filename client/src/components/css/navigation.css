@@ -1,6 +1,29 @@
-#searchDivNav {
+#search-div-nav {
   display: flex;
   flex-basis: 0%;
+  border: none;
+  border-radius: 6px;
+  box-shadow: 0 0 0 1px lightgrey;
+  background-color: white;
+}
+
+#search-icon:active,
+#search-icon:focus {
+  box-shadow: none;
+  border: none;
+  outline: none;
+}
+
+#search-icon-expander,
+#search-icon-expander:active,
+#search-icon-expander:focus {
+  background-color: transparent;
+  box-shadow: none;
+  border: none;
+}
+
+#search-div-nav:hover {
+  box-shadow: 0 0 0 1px rgb(158, 158, 158);
 }
 
 #accountDivNav {
@@ -9,6 +32,126 @@
   margin-left: auto;
 }
 
+#new-post-button-div {
+  padding-top: 5px;
+  height: 20px;
+}
+
 #search {
   min-width: 300px;
+  border: none;
+  background-color: transparent;
+}
+
+#search:focus {
+  border: none;
+  box-shadow: none;
+}
+
+.navbar-button {
+  border-radius: 6px;
+  background-color: transparent;
+  padding: 8px;
+  color: #3b49df;
+  text-decoration: none;
+  transition: 0.2s;
+  margin-right: 10px;
+}
+
+.navbar-button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.navbar-button-fill {
+  border-radius: 6px;
+  background-color: #3b49df;
+  padding: 8px;
+  color: white;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.navbar-button-fill:hover {
+  color: white;
+  background-color: #323ebe;
+}
+
+.accountDivNav {
+  flex-wrap: nowrap;
+  margin-bottom: 10px;
+}
+
+.search-dropdown {
+  width: 100%;
+}
+
+.dropdown-menu {
+  display: unset !important;
+  position: absolute !important;
+  min-width: 250px !important;
+  transition: opacity 0.1s ease-in-out;
+  right: 100px;
+  visibility: hidden;
+  opacity: 0;
+}
+
+#profile-picture-div:hover + .dropdown-menu,
+.dropdown-menu:hover {
+  visibility: visible;
+  opacity: 1;
+}
+
+#profile-picture-div {
+  position: relative;
+  padding-top: 0px;
+  padding-left: 20px;
+  width: 52px;
+}
+
+#profile-picture {
+  width: 32px;
+  height: 32px;
+  border-radius: 50px;
+  background-color: black;
+}
+
+.dropdown-item {
+  margin-left: 10px;
+  margin-right: 10px;
+  width: calc(100% - 20px) !important;
+  border-radius: 5px;
+}
+
+.f-right {
+  display: inline-flex;
+  float: right;
+}
+
+.navbar-button-margin {
+  margin-top: 8px;
+}
+
+.f-left {
+  display: inline-flex;
+  float: left;
+}
+
+.with-margin {
+  margin-top: 10px;
+}
+
+.dropdown-item:active,
+.dropdown-item:hover {
+  background-color: rgb(235, 235, 235) !important;
+  color: #4949aa !important;
+}
+
+@media screen and (max-width: 768px) {
+  .dropdown-menu {
+    left: 10px;
+    width: calc(100% - 20px);
+  }
+  .dropdown-div {
+    position: unset !important;
+  }
 }

@@ -1,6 +1,6 @@
 #postFormDiv {
   height: calc(100vh - 50px);
-  padding: 20px;
+  padding-top: 10px;
 }
 
 .post-form {
@@ -8,6 +8,7 @@
   font-size: 1.5rem;
   padding: 20px;
   margin-top: 20px;
+  resize: vertical;
 }
 
 .post-form-title {
@@ -18,6 +19,8 @@
 
 #post-content {
   height: 100%;
+  overflow: clip;
+  text-overflow: clip;
 }
 
 .post-form-content {
@@ -27,6 +30,8 @@
 }
 
 .post-form-element {
+  float: inline-end;
+  resize: vertical;
   height: 100%;
 }
 
@@ -38,13 +43,13 @@
 textarea {
   resize: none !important;
   width: 100%;
-  height: 100%;
 }
 
 form,
 textarea:focus-visible,
 textarea,
 textarea:focus form:focus-visible {
+  resize: vertical;
   border: none;
   outline: none;
 }

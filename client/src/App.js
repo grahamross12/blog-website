@@ -14,7 +14,6 @@ function App() {
       } catch (err) {
         console.error(err);
       }
-      console.log(isAuthenticated);
     }
     fetchData();
   }, []);
@@ -22,7 +21,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Navigation isAuthenticated={isAuthenticated} />
+        <Navigation isAuthenticated={false} />
         <div className="contentWrapper">
           <Switch>
             <Route path="/" exact component={() => <Home />} />

@@ -8,7 +8,12 @@ class BlogItem extends Component {
   render() {
     return (
       <div className="blogItemDiv rounded-div truncate-text">
-        <h1 className="title-link truncate-text">{this.props.title}</h1>
+        <a
+          href={this.props.user + "/" + this.props.title}
+          className="title-link truncate-text"
+        >
+          {this.props.title}
+        </a>
       </div>
     );
   }

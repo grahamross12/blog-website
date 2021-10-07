@@ -6,13 +6,13 @@ function Home() {
   return (
     <Container>
       <Row>
-        <Col>
+        <Col className="d-none d-md-block">
           <TagSuggestions />
         </Col>
         <Col md="8" lg="6">
           <Feed />
         </Col>
-        <Col>
+        <Col className="d-none d-lg-block">
           <BlogSuggestions />
         </Col>
       </Row>
