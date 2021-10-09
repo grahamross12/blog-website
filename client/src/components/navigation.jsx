@@ -18,6 +18,7 @@ import {
   Col,
   Row,
 } from "reactstrap";
+import { LoginButton, CreateAccountButton, LogoutButton } from "./";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import "./css/navigation.css";
@@ -54,12 +55,12 @@ class Navigation extends Component {
 
         {this.props.isAuthenticated ? (
           <div>
-            <Col id="new-post-button-div" className="d-none d-md-block">
+            <Col id="new-post-button-div" className="d-none d-md-block f-left">
               <a className="navbar-button-fill" href="/new">
                 Create Post
               </a>
             </Col>
-            <div className="dropdown-div">
+            <div className="dropdown-div f-right">
               <div id="profile-picture-div">
                 <div id="profile-picture"></div>
               </div>
@@ -98,32 +99,17 @@ class Navigation extends Component {
                   Settings
                 </a>
                 <div tabIndex="-1" className="dropdown-divider"></div>
-                <a
-                  href="/logout"
-                  type="button"
-                  tabIndex="0"
-                  role="menuitem"
-                  className="dropdown-item"
-                >
-                  Log Out
-                </a>
+                <LogoutButton />
               </div>
             </div>
           </div>
         ) : (
           <div>
             <Col className="d-none d-md-block f-left navbar-button-margin">
-              <a className="navbar-button" href="http://localhost:5000/login">
-                Log in
-              </a>
+              <LoginButton />
             </Col>
             <div className="f-right">
-              <a
-                className="navbar-button-fill"
-                href="http://localhost:5000/login"
-              >
-                Create account
-              </a>
+              <CreateAccountButton />
             </div>
           </div>
         )}

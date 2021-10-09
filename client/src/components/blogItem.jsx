@@ -14,6 +14,7 @@ class BlogItem extends Component {
         >
           {this.props.title}
         </a>
+        <p>{this.props.username}</p>
       </div>
     );
   }

@@ -1,5 +1,5 @@
 import React from "react";
-import { Feed, TagSuggestions, BlogSuggestions } from "./";
+import { Feed, TagSuggestions, BlogSuggestions } from "../components/";
 import { Container, Row, Col } from "reactstrap";
 
 function Home() {

@@ -35,6 +35,7 @@
 #new-post-button-div {
   padding-top: 5px;
   height: 20px;
+  margin-top: 8px;
 }
 
 #search {
@@ -86,19 +87,21 @@
 }
 
 .dropdown-menu {
+  display: relative;
   display: unset !important;
-  position: absolute !important;
   min-width: 250px !important;
-  transition: opacity 0.1s ease-in-out;
-  right: 100px;
+  transition: 0.15s ease-out;
+  right: 0px;
   visibility: hidden;
   opacity: 0;
+  top: 48px;
 }
 
 #profile-picture-div:hover + .dropdown-menu,
 .dropdown-menu:hover {
   visibility: visible;
   opacity: 1;
+  transition: 0.15s ease-in;
 }
 
 #profile-picture-div {
@@ -106,6 +109,8 @@
   padding-top: 0px;
   padding-left: 20px;
   width: 52px;
+  padding-bottom: 8px;
+  margin-top: 8px;
 }
 
 #profile-picture {
@@ -140,6 +145,10 @@
   margin-top: 10px;
 }
 
+.dropdown-div {
+  position: relative;
+}
+
 .dropdown-item:active,
 .dropdown-item:hover {
   background-color: rgb(235, 235, 235) !important;
@@ -148,6 +157,7 @@
 
 @media screen and (max-width: 768px) {
   .dropdown-menu {
+    position: absolute !important;
     left: 10px;
     width: calc(100% - 20px);
   }
