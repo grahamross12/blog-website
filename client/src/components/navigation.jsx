@@ -2,21 +2,12 @@ import React, { Component } from "react";
 import {
   Navbar,
   NavbarBrand,
-  DropdownToggle,
-  NavLink,
-  NavItem,
-  NavbarToggler,
   Nav,
-  DropdownItem,
-  DropdownMenu,
   Collapse,
-  UncontrolledDropdown,
   Form,
-  Label,
   Input,
   Button,
   Col,
-  Row,
 } from "reactstrap";
 import { LoginButton, CreateAccountButton, LogoutButton } from "./";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -55,14 +46,22 @@ class Navigation extends Component {
 
         {this.props.isAuthenticated ? (
           <div>
-            <Col id="new-post-button-div" className="d-none d-md-block f-left">
-              <a className="navbar-button-fill" href="/new">
+            <Col className="d-none d-md-block f-left">
+              <a
+                id="new-post-button"
+                className="navbar-button-fill"
+                href="/new"
+              >
                 Create Post
               </a>
             </Col>
             <div className="dropdown-div f-right">
               <div id="profile-picture-div">
-                <div id="profile-picture"></div>
+                <img
+                  id="profile-picture"
+                  src={this.props.user.picture}
+                  alt="Profile"
+                ></img>
               </div>
               <div
                 tabIndex="-1"
@@ -80,7 +79,10 @@ class Navigation extends Component {
                   Create Post
                 </a>
                 <a
-                  href="/$user$"
+                  href={
+                    "http://localhost:3000/user/" +
+                    this.props.user["http://localhost:3000/username"]
+                  }
                   type="button"
                   tabIndex="0"
                   role="menuitem"
@@ -105,7 +107,7 @@ class Navigation extends Component {
           </div>
         ) : (
           <div>
-            <Col className="d-none d-md-block f-left navbar-button-margin">
+            <Col className="d-none d-md-block f-left">
               <LoginButton />
             </Col>
             <div className="f-right">

@@ -4,7 +4,9 @@ import { Container } from "reactstrap";
 function PageNotFound() {
   return (
     <Container>
-      <h1>404: Page Not Found</h1>
+      <div className="page-not-found-div">
+        <h1>404: Page Not Found</h1>
+      </div>
     </Container>
   );
 }

@@ -1,9 +1,9 @@
 {
   "development": {
     "username": "admin",
-    "password": null,
+    "password": "The_turkey1",
     "database": "BlogDB",
-    "host": "localhost",
+    "host": "rds-blogdb.clae2idxvwij.eu-west-2.rds.amazonaws.com",
     "dialect": "mysql"
   },
   "test": {

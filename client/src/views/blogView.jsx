@@ -5,27 +5,22 @@ import { Container, Row, Col } from "reactstrap";
 
 function BlogView() {
   const [blogData, setBlogData] = useState(null);
-  const [notFound, setNotFound] = useState(false);
   const { username, blogTitle } = useParams();
 
-  async function fetchBlogPost(username, title) {
-    try {
-      const path = "http://localhost:5000/api/users/" + username + "/" + title;
-      const response = await fetch(path);
-      if (response.status == 404) setNotFound(true);
-      const blogData = await response.json();
-      if (!blogData[0]) {
-        setNotFound(true);
+  useEffect(() => {
+    async function fetchBlogPost(username, title) {
+      try {
+        const path =
+          "http://localhost:5000/api/users/" + username + "/" + title;
+        const response = await fetch(path);
+        const blogData = await response.json();
+        setBlogData(blogData);
+      } catch (err) {
+        console.log(err);
       }
-      setBlogData(blogData[0]);
-    } catch (err) {
-      console.log(err);
     }
-  }
-
-  useEffect(async () => {
-    await fetchBlogPost(username, blogTitle);
-  }, []);
+    fetchBlogPost(username, blogTitle);
+  }, [blogTitle, username]);
 
   function showResult() {
     return (

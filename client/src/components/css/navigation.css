@@ -32,10 +32,8 @@
   margin-left: auto;
 }
 
-#new-post-button-div {
-  padding-top: 5px;
-  height: 20px;
-  margin-top: 8px;
+#new-post-button {
+  width: 120px;
 }
 
 #search {
@@ -47,34 +45,6 @@
 #search:focus {
   border: none;
   box-shadow: none;
-}
-
-.navbar-button {
-  border-radius: 6px;
-  background-color: transparent;
-  padding: 8px;
-  color: #3b49df;
-  text-decoration: none;
-  transition: 0.2s;
-  margin-right: 10px;
-}
-
-.navbar-button:hover {
-  background-color: rgba(0, 0, 0, 0.05);
-}
-
-.navbar-button-fill {
-  border-radius: 6px;
-  background-color: #3b49df;
-  padding: 8px;
-  color: white;
-  text-decoration: none;
-  transition: 0.2s;
-}
-
-.navbar-button-fill:hover {
-  color: white;
-  background-color: #323ebe;
 }
 
 .accountDivNav {
@@ -97,6 +67,10 @@
   top: 48px;
 }
 
+#create-account-button {
+  width: 140px;
+}
+
 #profile-picture-div:hover + .dropdown-menu,
 .dropdown-menu:hover {
   visibility: visible;
@@ -110,7 +84,7 @@
   padding-left: 20px;
   width: 52px;
   padding-bottom: 8px;
-  margin-top: 8px;
+  margin-top: 3px;
 }
 
 #profile-picture {

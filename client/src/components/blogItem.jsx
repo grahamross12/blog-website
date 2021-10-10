@@ -2,19 +2,25 @@ import React, { Component } from "react";
 import "./css/blogItem.css";
 
 class BlogItem extends Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
     return (
       <div className="blogItemDiv rounded-div truncate-text">
         <a
-          href={this.props.user + "/" + this.props.title}
+          href={
+            "http://localhost:3000/user/" +
+            this.props.username +
+            "/" +
+            this.props.title
+          }
           className="title-link truncate-text"
         >
           {this.props.title}
         </a>
-        <p>{this.props.username}</p>
+        <div>
+          <a href={"http://localhost:3000/user/" + this.props.username}>
+            {this.props.username}
+          </a>
+        </div>
       </div>
     );
   }

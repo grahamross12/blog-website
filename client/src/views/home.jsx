@@ -1,8 +1,16 @@
 import React from "react";
 import { Feed, TagSuggestions, BlogSuggestions } from "../components/";
 import { Container, Row, Col } from "reactstrap";
+import { useParams, useLocation } from "react-router-dom";
 
-function Home() {
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
+
+function Home(props) {
+  const { username } = useParams();
+  let query = useQuery();
+  let searchQuery = query.get("search");
   return (
     <Container>
       <Row>
@@ -10,7 +18,11 @@ function Home() {
           <TagSuggestions />
         </Col>
         <Col md="8" lg="6">
-          <Feed />
+          <Feed
+            username={username}
+            searchQuery={searchQuery}
+            user={props.user}
+          />
         </Col>
         <Col className="d-none d-lg-block">
           <BlogSuggestions />

@@ -1,13 +1,13 @@
 #postFormDiv {
-  height: calc(100vh - 50px);
-  padding-top: 10px;
+  height: calc(100vh - 150px);
+  padding-top: 0px;
+  margin-top: 15px;
 }
 
 .post-form {
   width: 100%;
   font-size: 1.5rem;
   padding: 20px;
-  margin-top: 20px;
   resize: vertical;
 }
 
@@ -38,6 +38,14 @@
 .line-break {
   width: 95%;
   margin: auto;
+}
+
+#form-publish-buttons {
+  margin-top: 10px;
+}
+
+#publish-button {
+  width: 120px;
 }
 
 textarea {

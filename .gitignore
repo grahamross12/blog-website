@@ -1,7 +1,8 @@
 <<<<<<< HEAD
 **/.DS_Store
 server/.env
-Client/.env
+server/config.json
+client/.env
 
 =======
 >>>>>>> parent of 8839527 (changed gitignore)

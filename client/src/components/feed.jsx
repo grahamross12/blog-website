@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import BlogItem from "./blogItem.jsx";
 import "./css/feed.css";
-import { Container, Row, Col } from "reactstrap";
 
 class Feed extends Component {
   constructor() {
@@ -11,10 +10,19 @@ class Feed extends Component {
   componentDidMount = () => {
     this.getBlogsFromApi();
   };
-
   getBlogsFromApi = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/blogs");
+      let response;
+      if (this.props.username) {
+        const apiUrl = "http://localhost:5000/api/users/" + this.props.username;
+        response = await fetch(apiUrl);
+      } else if (this.props.searchQuery) {
+        const apiUrl =
+          "http://localhost:5000/api/blogs/" + this.props.searchQuery;
+        response = await fetch(apiUrl);
+      } else {
+        response = await fetch("http://localhost:5000/api/blogs");
+      }
       const blogsData = await response.json();
       this.setState({ blogs: blogsData });
     } catch (err) {
@@ -22,19 +30,33 @@ class Feed extends Component {
     }
   };
 
+  findUsername(blog) {
+    if (blog.user) {
+      return this.props.user["http://localhost:3000/username"];
+    }
+    return "error";
+  }
+
   render() {
-    console.log(this.state.blogs);
     return (
       <div>
-        {this.state.blogs
-          ? this.state.blogs.map((blog, index) => (
+        {this.state.blogs ? (
+          this.state.blogs[0] ? (
+            this.state.blogs.map((blog, index) => (
               <BlogItem
                 key={index}
-                username={blog.username}
+                username={this.findUsername(blog)}
                 title={blog.title}
               ></BlogItem>
             ))
-          : ""}
+          ) : (
+            <div>
+              <h2 id="no-results">No results</h2>
+            </div>
+          )
+        ) : (
+          ""
+        )}
       </div>
     );
   }

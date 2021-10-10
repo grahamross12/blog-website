@@ -24,3 +24,54 @@
   box-shadow: 0 0 0 1px lightgrey;
   background-color: white;
 }
+
+.navbar-button {
+  outline: none;
+  border: none;
+  text-align: center;
+  display: inline-block;
+  border-radius: 6px;
+  background-color: transparent;
+  padding: 8px;
+  color: #3b49df;
+  text-decoration: none;
+  transition: 0.2s;
+  margin-right: 10px;
+}
+
+.navbar-button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.navbar-button-fill {
+  outline: none;
+  border: none;
+  text-align: center;
+  display: inline-block;
+  border-radius: 6px;
+  background-color: #3b49df;
+  padding: 8px;
+  color: white;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.navbar-button-fill:hover {
+  color: white;
+  background-color: #323ebe;
+}
+
+.page-not-found-div {
+  margin: auto;
+  width: 800px;
+  margin-top: 30px;
+}
+
+#loading-div {
+  position: absolute;
+  width: 100px;
+  left: calc(50% - 50px);
+  width: 100px;
+  margin: auto;
+  bottom: 50vh;
+}
