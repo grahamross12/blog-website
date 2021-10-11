@@ -1,47 +1,65 @@
 #postFormDiv {
-  height: calc(100vh - 150px);
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+  min-height: calc(100vh - 100px);
   padding-top: 0px;
   margin-top: 15px;
 }
 
 .post-form {
+  display: flex;
   width: 100%;
   font-size: 1.5rem;
   padding: 20px;
+  padding-bottom: 10px;
   resize: vertical;
 }
 
 .post-form-title {
+  display: flex;
   font-size: 2rem;
   font-weight: bold;
-  height: 100px;
+  min-height: 100px;
 }
 
 #post-content {
-  height: 100%;
+  display: flex;
+  flex-grow: 1;
+  align-items: stretch;
+  flex-direction: column;
   overflow: clip;
   text-overflow: clip;
 }
 
 .post-form-content {
+  flex-grow: 1;
+  position: relative;
   font-size: 1.5rem;
-  display: inline-block;
-  height: 100%;
 }
 
 .post-form-element {
+  width: 100%;
+  flex-grow: 1;
+  flex-direction: column;
+  align-items: stretch;
+  display: flex;
   float: inline-end;
   resize: vertical;
-  height: 100%;
 }
 
 .line-break {
+  display: flex;
   width: 95%;
   margin: auto;
 }
 
 #form-publish-buttons {
+  display: flex;
   margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 #publish-button {
@@ -49,8 +67,8 @@
 }
 
 textarea {
-  resize: none !important;
   width: 100%;
+  resize: none !important;
 }
 
 form,

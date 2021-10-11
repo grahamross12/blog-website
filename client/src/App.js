@@ -35,9 +35,8 @@ function App() {
               component={() => <CreateUser user={user} />}
               user={user}
             />
-
             <Route
-              path="/user/:username/:blogTitle"
+              path="/user/:username/:blogUrl"
               exact
               component={() => <BlogView />}
             />

@@ -2,27 +2,38 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { PageNotFound } from "./";
 import { Container, Row, Col } from "reactstrap";
+import { Loading } from "./";
 
 function BlogView() {
   const [blogData, setBlogData] = useState(null);
-  const { username, blogTitle } = useParams();
+  const [isLoading, setIsLoading] = useState(true);
+  const { username, blogUrl } = useParams();
 
   useEffect(() => {
-    async function fetchBlogPost(username, title) {
+    async function fetchBlogPost(username, blogUrl) {
       try {
         const path =
-          "http://localhost:5000/api/users/" + username + "/" + title;
+          "http://localhost:5000/api/users/" + username + "/" + blogUrl;
         const response = await fetch(path);
         const blogData = await response.json();
         setBlogData(blogData);
+        setIsLoading(false);
       } catch (err) {
+        setIsLoading(false);
         console.log(err);
       }
     }
-    fetchBlogPost(username, blogTitle);
-  }, [blogTitle, username]);
+    fetchBlogPost(username, blogUrl);
+  }, [blogUrl, username]);
 
-  function showResult() {
+  function renderResult() {
+    if (blogData == null) {
+      return <PageNotFound />;
+    }
+    return showResult(blogData.title, blogData.content);
+  }
+
+  function showResult(blogTitle, blogContent) {
     return (
       <Container>
         <Row>
@@ -31,12 +42,10 @@ function BlogView() {
             <div id="postFormDiv">
               <div id="post-content" className="rounded-div">
                 <div className="post-form post-form-title">
-                  <h1 className="title-input">{blogData.title}</h1>
+                  <h1 className="title-input">{blogTitle}</h1>
                 </div>
                 <hr className="line-break" />
-                <div className="post-form post-form-content">
-                  {blogData.content}
-                </div>
+                <div className="post-form post-form-content">{blogContent}</div>
               </div>
             </div>
           </Col>
@@ -46,7 +55,7 @@ function BlogView() {
     );
   }
 
-  return <>{blogData == null ? <PageNotFound /> : showResult()}</>;
+  return <div>{isLoading ? <Loading /> : renderResult()}</div>;
 }
 
 export default BlogView;

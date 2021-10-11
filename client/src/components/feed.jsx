@@ -37,6 +37,13 @@ class Feed extends Component {
     return "error";
   }
 
+  findPicture(blog) {
+    if (blog.user) {
+      return blog.user.picture;
+    }
+    return "";
+  }
+
   render() {
     return (
       <div>
@@ -47,6 +54,9 @@ class Feed extends Component {
                 key={index}
                 username={this.findUsername(blog)}
                 title={blog.title}
+                picture={this.findPicture(blog)}
+                date={blog.createdAt}
+                url={blog.url}
               ></BlogItem>
             ))
           ) : (

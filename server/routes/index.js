@@ -42,6 +42,25 @@ router.get("/blogs/:searchQuery", cors(), async (req, res) => {
   }
 });
 
+// Check if blog url is unique
+router.get("/blogs/blogUrl/:blogUrl", cors(), async (req, res) => {
+  try {
+    const blogUrl = req.params.blogUrl;
+    const blogsInfo = await blogs.findAll({
+      include: [{ model: users, as: "user" }],
+      where: { url: blogUrl },
+    });
+    if (!blogsInfo[0]) {
+      res.send(true);
+      return;
+    }
+    res.send(false);
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(500);
+  }
+});
+
 // Return all blog posts from a given user
 router.get("/users/:username", cors(), async (req, res) => {
   try {
@@ -68,14 +87,18 @@ router.get("/users/:username", cors(), async (req, res) => {
 });
 
 // Return single blog post given a username and blog title
-router.get("/users/:username/:blogTitle", cors(), async (req, res) => {
+router.get("/users/:username/:blogUrl", cors(), async (req, res) => {
   try {
     const username = req.params.username;
-    const title = req.params.blogTitle;
+    const url = req.params.blogUrl;
     const userInfo = await users.findAll({
       where: { username: username },
-      include: [{ model: blogs, as: "blogs", where: { title: title } }],
+      include: [{ model: blogs, as: "blogs", where: { url: url } }],
     });
+    if (!userInfo[0]) {
+      res.sendStatus(404);
+      return;
+    }
     if (!userInfo[0].blogs[0]) {
       res.sendStatus(404);
       return;
@@ -93,15 +116,28 @@ router.post("/blogs", cors(), async (req, res) => {
     const username = req.body.username;
     const title = req.body.title;
     const content = req.body.content;
+    const url = req.body.url;
+    // Find id of user
     let userid = await users.findAll({
       attributes: ["id"],
       where: { username: username },
     });
     userid = userid[0].dataValues.id;
+
+    // Check if blog title is already created
+    const checkBlog = await blogs.findAll({
+      where: { title: title, userid: userid },
+    });
+    if (checkBlog[0]) {
+      res.sendStatus(200);
+      return;
+    }
+
     const newBlog = blogs.create({
       userid: userid,
       title: title,
       content: content,
+      url: url,
     });
     res.send(newBlog);
   } catch (err) {
