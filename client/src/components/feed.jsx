@@ -32,7 +32,7 @@ class Feed extends Component {
 
   findUsername(blog) {
     if (blog.user) {
-      return this.props.user["http://localhost:3000/username"];
+      return blog.user.username;
     }
     return "error";
   }

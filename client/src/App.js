@@ -1,4 +1,4 @@
-import { Navigation } from "./components";
+import { Navigation, CreateUser } from "./components";
 import { Home, New, PageNotFound, Loading, BlogView } from "./views";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -29,6 +29,13 @@ function App() {
               exact
               component={() => <New user={user} />}
             />
+            <ProtectedRoute
+              path="/callback"
+              exact
+              component={() => <CreateUser user={user} />}
+              user={user}
+            />
+
             <Route
               path="/user/:username/:blogTitle"
               exact

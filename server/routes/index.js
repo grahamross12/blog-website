@@ -87,7 +87,7 @@ router.get("/users/:username/:blogTitle", cors(), async (req, res) => {
   }
 });
 
-// Add a blog post to the database
+// Add a blog post to the blogs table
 router.post("/blogs", cors(), async (req, res) => {
   try {
     const username = req.body.username;
@@ -104,6 +104,32 @@ router.post("/blogs", cors(), async (req, res) => {
       content: content,
     });
     res.send(newBlog);
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(500);
+  }
+});
+
+// Add a user to the users table
+router.post("/users", cors(), async (req, res) => {
+  try {
+    const username = req.body.username;
+    const email = req.body.email;
+    const picture = req.body.picture;
+
+    // Check if user is already in users table
+    const user = await users.findAll({ where: { username: username } });
+    if (user[0]) {
+      res.sendStatus(200);
+      return;
+    }
+    // Add new user to the users table
+    const newUser = users.create({
+      username: username,
+      email: email,
+      picture: picture,
+    });
+    res.send(newUser);
   } catch (err) {
     console.error(err);
     res.sendStatus(500);

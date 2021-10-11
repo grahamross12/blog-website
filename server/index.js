@@ -4,7 +4,6 @@ const express = require("express");
 const cors = require("cors");
 const db = require("./models");
 const bodyParser = require("body-parser");
-const axios = require("axios");
 
 const apiRouter = require("./routes/index.js");
 
