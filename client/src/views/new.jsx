@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { Container, Row, Col } from "reactstrap";
 import "./css/new.css";
 import TextareaAutosize from "react-textarea-autosize";
 import axios from "axios";
-import { Redirect } from "react-router";
+import { SelectTags } from "../components/";
+import { withRouter } from "react-router";
 
 function titleToUrl(title) {
   var titleFormat = title
@@ -18,7 +19,8 @@ function titleToUrl(title) {
 }
 
 async function checkBlogUrl(url) {
-  const queryUrl = "http://localhost:5000/api/blogs/blogUrl/" + url;
+  const queryUrl =
+    process.env.REACT_APP_SERVER_DOMAIN + "/api/blogs/blogUrl/" + url;
   // Check if formatted title is the same as another title by the same user
   const response = await axios.get(queryUrl);
   return response.data;
@@ -34,76 +36,176 @@ async function findSimilarUrl(url) {
   return newUrl;
 }
 
-function New(props) {
-  const [redirect, setRedirect] = useState(false);
+class New extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      redirect: false,
+      tags: null,
+      maxTags: false,
+      selectedTags: new Set(),
+      noTitle: false,
+      noContent: false,
+    };
+  }
 
-  const publishBlog = async (event) => {
+  publishBlog = async (event) => {
     event.preventDefault();
-    const username = props.user["http://localhost:3000/username"];
+    const username = this.props.user["http://localhost:3000/username"];
     const title = event.target.form[0].value;
-    const content = event.target.form[1].value;
+    const content = event.target.form[2].value;
+    if (!title) {
+      this.setState({ noTitle: true });
+    }
+    if (!content) {
+      this.setState({ noContent: true });
+    }
+    if (this.state.noTitle || this.state.noContent) {
+      console.log("returned");
+      return;
+    }
     const url = titleToUrl(title);
     const newUrl = await findSimilarUrl(url);
+    const findTagIds = () => {
+      let tagsArray = [];
+      this.state.selectedTags.forEach((selectedTag) => {
+        this.state.tags.forEach((tag) => {
+          if (selectedTag === tag.tag) {
+            tagsArray.push(tag.id);
+          }
+        });
+      });
+      return tagsArray;
+    };
+    const tagIds = findTagIds();
     const blog = {
       username: username,
       title: title,
       content: content,
       url: newUrl,
+      tags: tagIds,
     };
-    const response = await axios.post("http://localhost:5000/api/blogs", blog);
+    console.log(blog);
+    const apiUrl = process.env.REACT_APP_SERVER_DOMAIN + "/api/blogs";
+    const response = await axios.post(apiUrl, blog);
     if (response.data) {
-      setRedirect(true);
+      this.setState({ redirect: true });
     }
   };
 
-  if (redirect) return <Redirect to="/" />;
-  return (
-    <Container>
-      <Row>
-        <Col />
-        <Col sm="12" md="10" lg="8">
-          <div id="postFormDiv">
-            <form className="post-form-element">
-              <div id="post-content" className="rounded-div">
-                <div className="post-form post-form-title">
-                  <TextareaAutosize
-                    style={{ height: "100% !important" }}
-                    id="title-input"
-                    type="text"
-                    name="title"
-                    placeholder="Title..."
-                    autoComplete="off"
+  componentDidMount = () => {
+    const getTags = async () => {
+      const apiUrl = process.env.REACT_APP_SERVER_DOMAIN + "/api/tags";
+      let tags = await axios.get(apiUrl);
+      this.setState({ tags: tags.data });
+    };
+    getTags();
+  };
+
+  handleAddTag = (event) => {
+    if (this.state.selectedTags.size >= 4) {
+      this.setState({ maxTags: true });
+      return;
+    }
+    this.setState({
+      selectedTags: this.state.selectedTags.add(event.target.value),
+    });
+  };
+
+  handleDeleteTag = (tag) => {
+    let newSelectedTags = new Set();
+    this.state.selectedTags.forEach((selectedTag) => {
+      if (selectedTag !== tag) {
+        newSelectedTags.add(selectedTag);
+      }
+    });
+    this.setState({ selectedTags: newSelectedTags, maxTags: false });
+  };
+
+  renderErrors = () => {
+    if (this.state.noTitle || this.state.noContent) {
+      return (
+        <div className="error-messages">
+          <h3 className="error-title">Error</h3>
+          {this.state.noTitle ? (
+            <div className="warning">Title cannot be blank</div>
+          ) : (
+            ""
+          )}
+          {this.state.noContent ? (
+            <div className="warning">Content cannot be blank</div>
+          ) : (
+            ""
+          )}
+        </div>
+      );
+    }
+  };
+
+  render() {
+    if (this.state.redirect) {
+      console.log(this.props);
+      this.props.history.push("/");
+      return null;
+    }
+    return (
+      <Container>
+        <Row>
+          <Col />
+          <Col sm="12" md="10" lg="8">
+            <div id="postFormDiv">
+              <form className="post-form-element">
+                <div id="post-content" className="rounded-div">
+                  {this.renderErrors()}
+                  <div className="post-form post-form-title">
+                    <TextareaAutosize
+                      style={{ height: "100% !important" }}
+                      id="title-input"
+                      type="text"
+                      name="title"
+                      placeholder="Title..."
+                      autoComplete="off"
+                    />
+                  </div>
+
+                  <SelectTags
+                    tags={this.state.tags}
+                    onAddTag={this.handleAddTag}
+                    selectedTags={this.state.selectedTags}
+                    maxTags={this.state.maxTags}
+                    onDeleteTag={this.handleDeleteTag}
                   />
+
+                  <hr className="line-break" />
+                  <div className="post-form post-form-content">
+                    <TextareaAutosize
+                      id="content-input"
+                      type="text"
+                      name="content"
+                      placeholder="Content..."
+                      autoComplete="off"
+                    />
+                  </div>
                 </div>
-                <hr className="line-break" />
-                <div className="post-form post-form-content">
-                  <TextareaAutosize
-                    id="content-input"
-                    type="text"
-                    name="content"
-                    placeholder="Content..."
-                    autoComplete="off"
-                  />
-                </div>
-              </div>
-              <Row id="form-publish-buttons">
-                <Col>
-                  <button
-                    onClick={publishBlog}
-                    id="publish-button"
-                    className="navbar-button-fill"
-                  >
-                    Publish
-                  </button>
-                </Col>
-              </Row>
-            </form>
-          </div>
-        </Col>
-        <Col />
-      </Row>
-    </Container>
-  );
+                <Row id="form-publish-buttons">
+                  <Col>
+                    <button
+                      onClick={this.publishBlog}
+                      id="publish-button"
+                      className="navbar-button-fill"
+                    >
+                      Publish
+                    </button>
+                  </Col>
+                </Row>
+              </form>
+            </div>
+          </Col>
+          <Col />
+        </Row>
+      </Container>
+    );
+  }
 }
 
-export default New;
+export default withRouter(New);

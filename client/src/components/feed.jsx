@@ -14,14 +14,26 @@ class Feed extends Component {
     try {
       let response;
       if (this.props.username) {
-        const apiUrl = "http://localhost:5000/api/users/" + this.props.username;
+        const apiUrl =
+          process.env.REACT_APP_SERVER_DOMAIN +
+          "/api/users/" +
+          this.props.username;
         response = await fetch(apiUrl);
       } else if (this.props.searchQuery) {
         const apiUrl =
-          "http://localhost:5000/api/blogs/" + this.props.searchQuery;
+          process.env.REACT_APP_SERVER_DOMAIN +
+          "/api/blogs/search/" +
+          this.props.searchQuery;
+        response = await fetch(apiUrl);
+      } else if (this.props.tagQuery) {
+        const apiUrl =
+          process.env.REACT_APP_SERVER_DOMAIN +
+          "/api/blogs/tag/" +
+          this.props.tagQuery;
         response = await fetch(apiUrl);
       } else {
-        response = await fetch("http://localhost:5000/api/blogs");
+        const apiUrl = process.env.REACT_APP_SERVER_DOMAIN + "/api/blogs";
+        response = await fetch(apiUrl);
       }
       const blogsData = await response.json();
       this.setState({ blogs: blogsData });
@@ -52,11 +64,8 @@ class Feed extends Component {
             this.state.blogs.map((blog, index) => (
               <BlogItem
                 key={index}
-                username={this.findUsername(blog)}
-                title={blog.title}
-                picture={this.findPicture(blog)}
-                date={blog.createdAt}
-                url={blog.url}
+                blog={blog}
+                user={this.props.user}
               ></BlogItem>
             ))
           ) : (

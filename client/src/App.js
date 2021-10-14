@@ -1,5 +1,5 @@
 import { Navigation, CreateUser } from "./components";
-import { Home, New, PageNotFound, Loading, BlogView } from "./views";
+import { Home, New, PageNotFound, Loading, BlogView, Settings } from "./views";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import React from "react";
@@ -20,7 +20,7 @@ function App() {
         <div className="contentWrapper">
           <Switch>
             <Route
-              path={["/", "/user/:username", "/?search=:searchQuery"]}
+              path={["/", "/user/:username", "/?tag=:tagQuery"]}
               exact
               component={() => <Home user={user} />}
             />
@@ -34,6 +34,10 @@ function App() {
               exact
               component={() => <CreateUser user={user} />}
               user={user}
+            />
+            <ProtectedRoute
+              path="/settings"
+              component={() => <Settings user={user} />}
             />
             <Route
               path="/user/:username/:blogUrl"

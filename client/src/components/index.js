@@ -8,3 +8,4 @@ export { default as LogoutButton } from "./logoutButton";
 export { default as TitleArea } from "./titleArea";
 export { default as ContentArea } from "./contentArea";
 export { default as CreateUser } from "./createUser";
+export { default as SelectTags } from "./selectTags";

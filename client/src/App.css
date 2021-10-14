@@ -4,18 +4,35 @@
 
 .suggestionsDiv {
   border: none;
-  border-radius: 10px;
-  box-shadow: 0 0 0 1px lightgrey;
+  border-radius: 5px;
+  box-shadow: 0 0 0 1px rgb(228, 228, 228);
   margin-top: 10px;
-  padding: 10px;
 }
 
 .tagSuggestionsDiv {
-  height: 400px;
+  background-color: rgb(248, 248, 248);
+  min-height: 200px;
 }
 
 .blogSuggestionsDiv {
-  height: 300px;
+  background-color: rgb(248, 248, 248);
+  min-height: 200px;
+}
+
+.bottom-margin {
+  height: 10px;
+}
+
+.sidebar-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 10px;
+  padding-bottom: 20px;
+}
+
+.list-divider {
+  margin: 0px;
+  color: rgb(147, 147, 147);
 }
 
 .rounded-div {
@@ -67,6 +84,15 @@
   margin-top: 30px;
 }
 
+.no-style {
+  text-decoration: none;
+  color: rgb(54, 54, 54);
+}
+
+.no-style:hover {
+  color: rgb(71, 71, 71);
+}
+
 #loading-div {
   position: absolute;
   width: 100px;
@@ -74,4 +100,39 @@
   width: 100px;
   margin: auto;
   bottom: 50vh;
+}
+
+.blog-list-item:hover {
+  background-color: white;
+}
+
+.blog-list-link {
+  text-decoration: none;
+  color: black;
+}
+
+.blog-list-link-div {
+  padding: 10px;
+  min-height: 60px;
+}
+
+.tag-menu-item-div {
+  padding-bottom: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.tag-menu-item:hover {
+  background-color: rgba(255, 230, 0, 0.75);
+}
+
+.tag-menu-item {
+  display: inline-block;
+  color: rgb(54, 54, 54);
+  background-color: rgba(255, 230, 0, 0.493);
+  border-radius: 10px;
+  box-shadow: 0 0 0 0px;
+  cursor: pointer;
+  padding-left: 5px;
+  padding-right: 8px;
 }

@@ -26,11 +26,28 @@
 }
 
 .blog-post-mid {
-  flex: none;
-  position: static;
-  height: 70%;
+  height: 45%;
   width: calc(100%-80px);
   margin-left: 60px;
+}
+
+.blog-post-bottom {
+  display: flex;
+  flex: none;
+  flex-wrap: nowrap;
+  position: static;
+  height: calc(30% - 10px);
+  width: calc(100% - 40px);
+  margin-left: 20px;
+}
+
+.save-info-div {
+  margin-top: 5px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  float: right;
+  margin-left: auto;
 }
 
 .full-width {
@@ -70,4 +87,51 @@
 
 .full-height {
   height: 100%;
+}
+
+.save-icon {
+  display: flex;
+  float: right;
+  font-size: 1rem;
+  transition: 1s;
+}
+
+.tags-feed {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  float: left;
+}
+
+.tag-small {
+  font-size: 0.8rem;
+  height: 20px !important;
+}
+
+.tag:hover {
+  background-color: rgb(212, 212, 212);
+}
+
+.save-icon-fa {
+  color: lightgrey;
+  transition: 0.2s;
+}
+
+.save-icon:active,
+.save-icon:focus,
+.save-icon {
+  outline: 0;
+  box-shadow: none;
+  border: 0;
+  background-color: transparent;
+}
+
+.save-counter {
+  color: grey;
+  margin-right: 5px;
+}
+
+.active {
+  color: gold;
+  transition: 0.2s;
 }

@@ -13,6 +13,11 @@ module.exports = (sequelize, DataTypes) => {
     url: {
       type: DataTypes.TEXT,
     },
+    saves: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0,
+    },
   });
 
   return blogs;

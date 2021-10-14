@@ -9,7 +9,8 @@ function CreateUser(props) {
       const email = props.user["email"];
       const picture = props.user["picture"];
       const body = { username: username, email: email, picture: picture };
-      axios.post("http://localhost:5000/api/users/", body);
+      const apiUrl = process.env.REACT_APP_SERVER_DOMAIN + "/api/users/";
+      axios.post(apiUrl, body);
     }
     return <Redirect to="/" />;
   }
